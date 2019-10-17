@@ -2,10 +2,10 @@
 
 ## USER
 #### GET /api/user/
-###### mengambil semua data user  
+###### mengambil semua data user. data picture tidak diambil, hanya idnya saja.
 
 #### GET /api/user/:user_id 
-###### mengambil data user berdasarkan id  
+###### mengambil data user berdasarkan id beserta picture yang dimiliki user
 
 #### POST /api/user/ 
 ###### mengingput data ke database, format pada body {name : string, age : number, email : string, address : string}  
@@ -26,7 +26,7 @@
 ###### mengambil data picture berdsarkan id  
 
 #### GET /api/picture/user/:user_id 
-###### mengambil data user dan data picture milik user  
+###### mengambil semua data pictures yang dimiliki user berdasarkan user_id  
 
 #### POST /api/picture/ 
 ###### menginput data picture ke database, format pada body {user_id : number, pic_name : string, pic_url : string}  

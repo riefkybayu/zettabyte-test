@@ -27,9 +27,21 @@ app.get("/api/user/", (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-app.get("/api/user/:name", (req, res) => {
-    user.find({name:req.params.name}).exec()
-    .then(result => res.status(200).send(result))
+app.get("/api/user/:user_id", (req, res) => {
+    picture.find({user_id : req.params.user_id}).exec()
+    .then(result => {
+        user.findOne({user_id : req.params.user_id}).exec()
+        .then(result_user => {
+            res.status(500).send(JSON.stringify({
+                user_id : result_user.user_id,
+                name : result_user.name,
+                age : result_user.age,
+                email : result_user.email,
+                address : result_user.address,
+                pictures : result,
+            }));
+        }).catch(err => res.status(500).send(err));
+    })
     .catch(err => res.status(500).send(err));
 });
 
@@ -77,19 +89,7 @@ app.get("/api/picture/:pic_id", (req, res) => {
 
 app.get("/api/picture/user/:user_id", (req, res) => {
     picture.find({user_id : req.params.user_id}).exec()
-    .then(result => {
-        user.findOne({user_id : req.params.user_id}).exec()
-        .then(result_user => {
-            res.status(500).send(JSON.stringify({
-                user_id : result_user.user_id,
-                name : result_user.name,
-                age : result_user.age,
-                email : result_user.email,
-                address : result_user.address,
-                pictures : result,
-            }));
-        }).catch(err => res.status(500).send(err));
-    })
+    .then(result => { res.status(200).send(result)}).catch(err => res.status(500).send(err))
     .catch(err => res.status(500).send(err));
 });
 
