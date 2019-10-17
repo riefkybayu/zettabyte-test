@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://bayu:UCEK5Ts6LoiaFusU@riefkybayu-ox7jc.mongodb.n
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 today = dd + '-' + mm + '-' + yyyy;
 today_str = today.toString();
@@ -47,7 +47,7 @@ app.post("/api/user/", async (req, res) =>{
 });
 
 app.put("/api/user/:user_id", (req, res) => {
-    user.updateMany({user_id:req.params.user_id}, {
+    user.updateOne({user_id:req.params.user_id}, {
         name : req.body.name,
         age : req.body.age,
         email : req.body.email,
@@ -107,7 +107,6 @@ app.post("/api/picture/", async(req, res) => {
     })
     .catch(err => res.status(500).send(err));
 });
-
 
 app.delete("/api/picture/:pic_id", (req, res)=> {
     picture.findOneAndDelete({pic_id:req.params.pic_id}).exec()
