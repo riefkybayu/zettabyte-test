@@ -1,8 +1,12 @@
 # API
 
 ## USER
-#### GET /api/user/  = mengambil semua data user
-#### GET /api/user/:user_id = mengambil data user berdasarkan id
+#### GET /api/user/
+###### mengambil semua data user  
+
+#### GET /api/user/:user_id 
+###### mengambil data user berdasarkan id  
+
 #### POST /api/user/ = mengingput data ke database, format pada body {name : string, age : number, email : string, address : string}  
 #### PUT /api/user/:user_id = mengupdate data user di database, format pada body sama dengan POST
 #### DELETE /api/user/:user_id = menghapus data user bedasarkan id  
