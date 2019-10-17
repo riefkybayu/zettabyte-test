@@ -36,3 +36,7 @@
 
 #### DELETE /api/picture/:pic_id 
 ###### menghapus data gambar berdasarkan pic_id dan mengahapus data pictures pada user  
+
+
+## DATABASE
+#### Data disimpan di mongodb atlas

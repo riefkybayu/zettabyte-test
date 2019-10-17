@@ -81,8 +81,12 @@ app.get("/api/picture/user/:user_id", (req, res) => {
         user.findOne({user_id : req.params.user_id}).exec()
         .then(result_user => {
             res.status(500).send(JSON.stringify({
-                user : result_user,
-                pictures : result
+                user_id : result_user.user_id,
+                name : result_user.name,
+                age : result_user.age,
+                email : result_user.email,
+                address : result_user.address,
+                pictures : result,
             }));
         }).catch(err => res.status(500).send(err));
     })
