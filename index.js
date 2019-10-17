@@ -63,6 +63,32 @@ app.delete("/api/user/:user_id", (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+app.get("/api/picture", (req, res) => {
+    picture.find().exec()
+    .then(result => res.status(200).send(result))
+    .catch(err => res.status(500).send(err));
+})
+
+app.get("/api/picture/:pic_id", (req, res) => {
+    picture.findOne({pic_id : req.params.pic_id}).exec()
+    .then(result => res.status(200).send(result))
+    .catch(err => res.status(500).send(err));
+})
+
+app.get("/api/picture/user/:user_id", (req, res) => {
+    picture.find({user_id : req.params.user_id}).exec()
+    .then(result => {
+        user.findOne({user_id : req.params.user_id}).exec()
+        .then(result_user => {
+            res.status(500).send(JSON.stringify({
+                user : result_user,
+                pictures : result
+            }));
+        }).catch(err => res.status(500).send(err));
+    })
+    .catch(err => res.status(500).send(err));
+});
+
 app.post("/api/picture/", async(req, res) => {
     jumlah = await picture.countDocuments().exec().then(result => result).catch(err => console.log(err));
     const new_picture = new picture({
@@ -82,11 +108,7 @@ app.post("/api/picture/", async(req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-app.get("/api/picture", (req, res) => {
-    picture.find().exec()
-    .then(result => res.status(200).send(result))
-    .catch(err => res.status(500).send(err));
-})
+
 app.delete("/api/picture/:pic_id", (req, res)=> {
     picture.findOneAndDelete({pic_id:req.params.pic_id}).exec()
     .then(result => {
